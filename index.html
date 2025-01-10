@@ -1,10 +1,40 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Quest</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <h1>🍴 Meal Quest</h1>
+      <p>Search your favorite meal and find cooking instructions</p>
+    </div>
+  </header>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="container">
+      <input type="text" id="mealName" placeholder="Enter meal name..." />
+      <button onclick="searchMeals()">Search</button>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="results-section">
+    <div class="container" id="mealsDisplay"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Meal Quest © 2025 | Made with ❤️</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="sccript.js"></script>
 </body>
 </html>
