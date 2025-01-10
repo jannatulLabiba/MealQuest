@@ -12,9 +12,9 @@ document.getElementById("searchButton").addEventListener("click", function () {
     .then((response) => response.json())
     .then((data) => {
       if (data.meals) {
-        displayMeals(data.meals.slice(0, 5), data.meals);
+        displayMeals(data.meals.slice(0, 5), data.meals); // Pass the first 5 meals and all meals
       } else {
-        displayMeals([], []);
+        document.getElementById("mealsDisplay").innerHTML = "No meals found.";
       }
     })
     .catch((error) => {
@@ -27,11 +27,6 @@ function displayMeals(meals, allMeals) {
   const displayDiv = document.getElementById("mealsDisplay");
   displayDiv.innerHTML = ""; // Clear previous results
 
-  if (meals.length === 0) {
-    displayDiv.innerHTML = "No meals found.";
-    return;
-  }
-
   meals.forEach((meal) => {
     const mealItem = document.createElement("div");
     mealItem.className = "mealItem";
@@ -43,27 +38,26 @@ function displayMeals(meals, allMeals) {
     const mealName = document.createElement("h3");
     mealName.textContent = meal.strMeal;
 
-    const mealInstruction = document.createElement("p");
-    mealInstruction.textContent =
-      "Cooking Instruction: " + meal.strInstructions.substring(0, 100) + "...";
-
     const mealID = document.createElement("p");
-    mealID.textContent = "Meal ID: " + meal.idMeal;
+    mealID.textContent = `Meal ID: ${meal.idMeal}`;
 
     mealItem.appendChild(mealImg);
     mealItem.appendChild(mealName);
-    mealItem.appendChild(mealInstruction);
     mealItem.appendChild(mealID);
+
+    // Add click event to navigate to the meal detail page
+    mealItem.addEventListener("click", () => {
+      window.location.href = `meal-detail.html?id=${meal.idMeal}`;
+    });
+
     displayDiv.appendChild(mealItem);
   });
 
-  if (allMeals.length > 5) {
+  if (allMeals.length > meals.length) {
     const showAllButton = document.createElement("button");
     showAllButton.className = "show-all-button";
     showAllButton.textContent = "SHOW ALL";
-    showAllButton.onclick = function () {
-      displayMeals(allMeals, []);
-    };
+    showAllButton.addEventListener("click", () => displayMeals(allMeals, [])); // Show all meals
     displayDiv.appendChild(showAllButton);
   }
 }
